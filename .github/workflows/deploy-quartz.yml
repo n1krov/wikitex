@@ -38,8 +38,8 @@ jobs:
         run: git clone https://github.com/n1krov/quitex-docs.git /home/runner/work/quitex-wiki/content
 
       # mover elcontenido del directorio ubuntu_server a wiki para que enlace solo el directorio wiki
-      - name: Mover contenido de ubuntu_server a wiki
-        run: mv /home/runner/work/quitex-wiki/content/ubuntu_server/ /home/runner/work/quitex-wiki/content/.
+      # - name: Mover contenido de ubuntu_server a wiki
+        # run: mv /home/runner/work/quitex-wiki/content/ubuntu_server/ /home/runner/work/quitex-wiki/content/wiki/.
 
       - name: Set Modified Date of Every File to Last Commit Time
         run: cd /home/runner/work/quitex-wiki/content/wiki && git ls-files -z | xargs -0 -I {} git log -1 --date=format:%Y%m%d%H%M.%S --format='touch -t %ad "{}"' {} | bash
@@ -50,7 +50,7 @@ jobs:
       - name: Creando symlink para Quartz
         run: |
           rm -rf 
-          ln -s /home/runner/work/quitex-wiki/content/wiki content
+          ln -s /home/runner/work/quitex-wiki/content content
 
       - name: Generando el sitio web con Quartz
         run: npx quartz build
